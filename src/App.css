@@ -1,0 +1,55 @@
+
+.results-section {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  justify-content: center;
+}
+
+.card {
+  width: 240px;
+  background: #1e293b;
+  padding: 10px;
+  border-radius: 10px;
+  color: white;
+}
+
+.card-image {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.card {
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+}
+
+.card.selected {
+  width: 400px;
+}
+
+.card-effect {
+  margin-top: 10px;
+  padding-top: 8px;
+  border-top: 1px solid #475569;
+  font-size: 13px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.card-effect strong {
+  display: block;
+  margin-bottom: 5px;
+  color: #facc15;
+}
+
+.card-effect p {
+  margin: 0;
+  white-space: pre-line;
+}
+
