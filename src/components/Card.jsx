@@ -1,31 +1,20 @@
-function Card({ card, isSelected, onSelect }) {
-  const image =
-    card.image_uris?.normal ||
-    card.card_faces?.[0]?.image_uris?.normal;
+import { getCardImage } from "../cardUtils";
+
+function Card({ card, isSelected, onSelect, onAdd }) {
+  const image = getCardImage(card);
 
   const effect =
     card.oracle_text ||
     card.card_faces
-      ?.map(
-        (face) => `${face.name}\n${face.oracle_text || ""}`
-      )
+      ?.map((face) => `${face.name}\n${face.oracle_text || ""}`)
       .join("\n\n") ||
     "No effect text available.";
 
   return (
-    <div
-      className={`card ${isSelected ? "selected" : ""}`}
-      onClick={onSelect}
-    >
+    <div className={`card ${isSelected ? "selected" : ""}`} onClick={onSelect}>
       <h3>{card.name}</h3>
 
-      {image && (
-        <img
-          src={image}
-          alt={card.name}
-          className="card-image"
-        />
-      )}
+      {image && <img src={image} alt={card.name} className="card-image" />}
 
       <p className="card-type">{card.type_line}</p>
 
@@ -35,6 +24,15 @@ function Card({ card, isSelected, onSelect }) {
           <p>{effect}</p>
         </div>
       )}
+
+      <button
+        onClick={(event) => {
+          event.stopPropagation();
+          onAdd();
+        }}
+      >
+        Add to Deck
+      </button>
     </div>
   );
 }

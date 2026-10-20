@@ -1,42 +1,186 @@
+:root {
+  --bg: #0f172a;
+  --panel: #1e293b;
+  --panel-2: #334155;
+  --border: #475569;
+  --text: #f8fafc;
+  --muted: #cbd5e1;
+  --accent: #3b82f6;
+  --accent-hover: #2563eb;
+  --danger: #dc2626;
+  --danger-hover: #b91c1c;
+}
 
-.results-section {
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+h2,
+h3,
+h4 {
+  margin-top: 0;
+}
+
+.app {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+header {
+  text-align: center;
+  padding: 25px 0;
+}
+
+header h1 {
+  margin: 0 0 10px;
+  font-size: 2.5rem;
+  color: #60a5fa;
+}
+
+header p {
+  color: var(--muted);
+}
+
+.game-toggle {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 20px 0;
+}
+
+.game-toggle button {
+  background: var(--panel);
+  border: 1px solid var(--border);
+}
+
+.game-toggle button:hover {
+  background: var(--panel-2);
+}
+
+.game-toggle button.active {
+  background: #0284c7;
+  border-color: #38bdf8;
+}
+
+.search-section,
+.deck-section,
+.basic-lands-section,
+.hand-tester,
+.commander-selector,
+.deck-view {
+  margin-bottom: 24px;
+  padding: 20px;
+  background: var(--panel);
+  border-radius: 10px;
+}
+
+.deck-view {
+  background: var(--bg);
+}
+
+button {
+  padding: 9px 14px;
+  border: none;
+  border-radius: 6px;
+  background: var(--accent);
+  color: white;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+button:hover {
+  background: var(--accent-hover);
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+input {
+  padding: 10px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--bg);
+  color: white;
+  font-size: 16px;
+}
+
+input:focus {
+  outline: 2px solid #60a5fa;
+}
+
+.card-search form {
   display: flex;
   flex-wrap: wrap;
-  gap: 15px;
-  justify-content: center;
+  gap: 10px;
+}
+
+.card-search form input {
+  flex: 1;
+  min-width: 180px;
+}
+
+.error-message {
+  color: #f87171;
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 20px;
+  align-items: start;
 }
 
 .card {
-  width: 240px;
-  background: #1e293b;
-  padding: 10px;
+  padding: 12px;
+  background: var(--panel);
+  border: 1px solid var(--border);
   border-radius: 10px;
-  color: white;
-}
-
-.card-image {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-
-.card {
   cursor: pointer;
-  transition: transform 0.2s ease;
+  transition: transform 0.2s ease, border-color 0.2s ease;
 }
 
 .card:hover {
   transform: translateY(-4px);
+  border-color: #60a5fa;
 }
 
 .card.selected {
-  width: 400px;
+  border: 2px solid #60a5fa;
+}
+
+.card h3 {
+  font-size: 16px;
+  overflow-wrap: anywhere;
+}
+
+.card-image,
+.deck-card-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.card-type {
+  color: var(--muted);
+  font-size: 13px;
 }
 
 .card-effect {
   margin-top: 10px;
   padding-top: 8px;
-  border-top: 1px solid #475569;
+  border-top: 1px solid var(--border);
   font-size: 13px;
   line-height: 1.5;
   overflow-wrap: anywhere;
@@ -53,3 +197,302 @@
   white-space: pre-line;
 }
 
+.card button,
+.deck-card-info button,
+.basic-land-card button {
+  width: 100%;
+  margin-top: 10px;
+}
+
+.selected-commander {
+  display: grid;
+  grid-template-columns: 110px 1fr;
+  column-gap: 14px;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.selected-commander img {
+  grid-row: span 2;
+  width: 220px;
+  border-radius: 6px;
+}
+
+.selected-commander p {
+  margin: 4px 0;
+}
+
+.commander-results {
+  margin-top: 24px;
+}
+
+.commander-option {
+  padding: 12px;
+  background: var(--panel-2);
+  border-radius: 10px;
+  text-align: center;
+}
+
+.commander-option img {
+  width: 100%;
+  max-width: 150px;
+  border-radius: 8px;
+}
+
+.commander-option h4 {
+  margin: 10px 0 6px;
+}
+
+.commander-option p {
+  margin: 0 0 8px;
+  font-size: 14px;
+}
+
+.deck-count {
+  color: var(--muted);
+  font-weight: bold;
+}
+
+.deck-progress {
+  height: 10px;
+  margin: 12px 0;
+  background: var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.deck-progress-fill {
+  height: 100%;
+  background: var(--accent);
+  transition: width 0.2s ease;
+}
+
+.yugioh-deck-counts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.yugioh-deck-counts small,
+.deck-list small {
+  display: block;
+  margin-top: 6px;
+  color: #94a3b8;
+  font-size: 12px;
+}
+
+.hand-tester-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 20px 0;
+}
+
+.deck-list-section {
+  margin: 24px 0;
+}
+
+.deck-list {
+  padding: 0;
+  list-style: none;
+}
+
+.deck-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.deck-list li span {
+  overflow-wrap: anywhere;
+}
+
+.deck-list button,
+.warning-popup button {
+  flex-shrink: 0;
+  background: var(--danger);
+}
+
+.deck-list button:hover,
+.warning-popup button:hover {
+  background: var(--danger-hover);
+}
+
+.deck-card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+  gap: 20px;
+  margin: 20px 0;
+}
+
+.deck-card {
+  overflow: hidden;
+  background: var(--panel-2);
+  border-radius: 12px;
+}
+
+.deck-card-image {
+  aspect-ratio: 488 / 680;
+  object-fit: contain;
+}
+
+.deck-card-info {
+  padding: 12px;
+}
+
+.deck-card-info h4 {
+  margin: 0 0 8px;
+}
+
+.deck-card-info small {
+  display: block;
+  color: var(--muted);
+}
+
+.basic-lands-header,
+.tester-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.basic-land-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 18px;
+  margin-top: 20px;
+}
+
+.basic-land-card {
+  padding: 12px;
+  background: var(--panel-2);
+  border-radius: 10px;
+  text-align: center;
+}
+
+.basic-land-card img {
+  width: 100%;
+  max-width: 180px;
+  border-radius: 8px;
+}
+
+.basic-land-card h3 {
+  margin: 12px 0;
+}
+
+.basic-land-card input {
+  width: 100%;
+  margin: 8px 0 0;
+}
+
+.tester-hand {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  padding: 12px 2px 18px;
+}
+
+.tester-hand-card {
+  flex: 0 0 130px;
+  text-align: center;
+}
+
+.tester-hand-card img {
+  width: 100%;
+  border-radius: 8px;
+}
+
+.tester-hand-card p {
+  font-size: 13px;
+  overflow-wrap: anywhere;
+}
+
+.card-image-fallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 130px;
+  padding: 8px;
+  background: var(--panel-2);
+  border-radius: 6px;
+  text-align: center;
+}
+
+.warning-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.7);
+}
+
+.warning-popup {
+  width: 100%;
+  max-width: 400px;
+  padding: 25px;
+  background: var(--panel);
+  border: 2px solid #ef4444;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+}
+
+.warning-popup h2 {
+  color: #f87171;
+}
+
+.warning-popup p {
+  line-height: 1.6;
+  color: var(--muted);
+}
+
+@media (max-width: 1000px) {
+  .card-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 650px) {
+  .app {
+    padding: 12px;
+  }
+
+  header h1 {
+    font-size: 1.8rem;
+  }
+
+  .card-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .card {
+    padding: 8px;
+  }
+
+  .card h3 {
+    font-size: 14px;
+  }
+
+  .yugioh-deck-counts {
+    grid-template-columns: 1fr;
+  }
+
+  .tester-hand-card {
+    flex-basis: 105px;
+  }
+}
+
+@media (max-width: 360px) {
+  .card-grid {
+    grid-template-columns: 1fr;
+  }
+}
