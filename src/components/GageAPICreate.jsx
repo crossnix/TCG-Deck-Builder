@@ -1,16 +1,13 @@
 import { useState, useEffect } from "react";
 
 
-const sendToApi = async (d) => {
-
-};
-
-
 async function CreateDeck (deck) {
     const deckObj = Object.assign({}, deck);
     const [myDeck, setmyDeck] = useState(deckObj);
 
     const jsonDeck = JSON.stringify(myDeck);
+
+    console.log(jsonDeck);
 
     const url = "https://basecampgenericapi.onrender.com/";
     const response = await fetch(url, {
