@@ -5,6 +5,8 @@ import HandTester from "./HandTester";
 import { getCardImage, isExtraDeckCard } from "../cardUtils";
 import CreateDeck from "./GageAPICreate";
 import DeleteDeck from "./GageAPIDelete";
+import UpdateDeck from "./GageAPIUpdate";
+
 
 const BASIC_LAND_NAMES = ["Plains", "Island", "Swamp", "Mountain", "Forest"];
 const EXTRA_LIMIT = 15;
@@ -27,6 +29,7 @@ function DeckBuilder({ cards, loading, error, game, selectedCommander, setSelect
   const [deck, setDeck] = useState([]);
 
   CreateDeck(deck);
+  UpdateDeck(deck);
 
   const [view, setView] = useState("builder");
   const [expandedCardId, setExpandedCardId] = useState(null);
@@ -42,10 +45,13 @@ function DeckBuilder({ cards, loading, error, game, selectedCommander, setSelect
   const extraDeck = isMagic ? [] : deck.filter(isExtraDeckCard);
   const mainDeck = isMagic ? deck : deck.filter((card) => !isExtraDeckCard(card));
 
+
   useEffect(() => {
     if (!isMagic) return;
 
     let cancelled = false;
+
+    
 
     async function fetchBasicLands() {
       setLandLoading(true);
