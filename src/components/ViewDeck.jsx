@@ -1,4 +1,5 @@
 import "../App.css";
+import ReadDeck from "./GageAPIRead";
 
 function isExtraDeckCard(card) {
   const type = card.type_line || card.type || "";
@@ -6,6 +7,8 @@ function isExtraDeckCard(card) {
 }
 
 function ViewDeck({ deck, onRemove, onClear, onBack, game = "mtg" }) {
+  const myDeck = ReadDeck();
+
   const isMagic = game === "mtg";
 
   const mainCards = deck
