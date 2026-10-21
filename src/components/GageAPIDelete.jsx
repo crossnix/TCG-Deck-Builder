@@ -12,3 +12,4 @@ async function DeleteDeck (deck) {
     })
 }
 
+export default DeleteDeck;
