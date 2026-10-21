@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-async function DeleteDeck (deck) {
+async function DeleteDeck () {
     //const deckObj = Object.assign({}, deck);
     //const [myDeck, setmyDeck] = useState(deckObj);
 

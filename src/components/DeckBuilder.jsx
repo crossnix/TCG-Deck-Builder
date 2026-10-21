@@ -3,6 +3,8 @@ import Card from "./Card";
 import ViewDeck from "./ViewDeck";
 import HandTester from "./HandTester";
 import { getCardImage, isExtraDeckCard } from "../cardUtils";
+import CreateDeck from "./GageAPICreate";
+import DeleteDeck from "./GageAPIDelete";
 
 const BASIC_LAND_NAMES = ["Plains", "Island", "Swamp", "Mountain", "Forest"];
 const EXTRA_LIMIT = 15;
@@ -23,6 +25,9 @@ function DeckBuilder({ cards, loading, error, game, selectedCommander, setSelect
   const mainLimit = isMagic ? 100 : 60;
 
   const [deck, setDeck] = useState([]);
+
+  CreateDeck(deck);
+
   const [view, setView] = useState("builder");
   const [expandedCardId, setExpandedCardId] = useState(null);
   const [deckMessage, setDeckMessage] = useState("");
@@ -163,6 +168,7 @@ function DeckBuilder({ cards, loading, error, game, selectedCommander, setSelect
     setDeck([]);
     setSelectedCommander(null);
     setDeckMessage("Deck cleared.");
+    DeleteDeck();
   }
 
   const backToBuilder = () => setView("builder");
